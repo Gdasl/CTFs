@@ -1,1 +1,1 @@
-# CTFs-TokyoWesterns-2017
+# CTFs
