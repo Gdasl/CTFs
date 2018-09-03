@@ -39,6 +39,6 @@ n = ((q*e)-1)/j * q
 n*j = e*q^2 - q
 e*q^2 - q - n*j = 0
 ```
-The last is just a simple quadratic equation. All we need to do now is to solve it for 0 < j < 65537, check if the solution is prime, and check if the solution is a divisor of n. On a decent i7 using sympy it takes around 10 seconds / 1000 (7000 if you parallelize), whic makes bruteforcing a very convenient way of solving this.
+The last is just a simple quadratic equation. All we need to do now is to solve it for 0 < j < 65537, check if the solution is prime, and check if the solution is a divisor of n. On a decent i7 using sympy it takes around 10 seconds / 1000 (7000 if you parallelize), which makes bruteforcing a very convenient way of solving this.
 
 
