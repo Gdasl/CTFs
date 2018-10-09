@@ -1,0 +1,56 @@
+#!/usr/bin/python2 -u
+from Crypto.Cipher import AES
+from solver import split
+import string
+noice = string.ascii_letters+string.digits +'{}_'
+agent_code = """picoCTF{GDASL_is_the_best______lol}"""
+
+def pad(message):
+    if len(message) % 16 != 0:
+        message = message + '0'*(16 - len(message)%16 )
+    return message
+
+def encrypt(key, plain):
+    cipher = AES.new( key, AES.MODE_ECB )
+    return cipher.encrypt(plain).encode('hex')
+
+welcome = "Welcome, Agent 006!"
+print welcome
+
+def go(sitrep):
+##sitrep = raw_input("Please enter your situation report: ")
+    message = """Agent,
+    Greetings. My situation report is as follows:
+    {0}
+    My agent identifying code is: {1}.
+    Down with the Soviets,
+    006
+    """.format( sitrep + '\n', agent_code )
+    
+    message = pad(message)
+    print split(message,8)
+    tmp = encrypt( "secretsecretsecr", message )
+    print tmp
+    return tmp
+
+
+first =  '    My agent identifying code ' ##gives first letter
+##blocki = split(go(first),16)[7] ##block containing first letter of flag##
+
+first_test = '    My agent identifying code is: ' ##needs char added
+
+
+def runit(fi,ft):
+    stri = ''
+    for j in range(32):
+        base = go(fi[j:])
+        for i in noice:
+            ans = go(ft[j:]+i )
+            if split(ans,16)[5] == split(base,16)[7]:
+                ft = ft+i
+                stri+=i
+                print stri
+                break
+
+
+
