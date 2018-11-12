@@ -6,6 +6,9 @@ from itertools import chain
 import webbrowser
 import win32clipboard
 import re
+import requests
+
+atWork = False
 
 import win32api, win32con
 import win32com.client
@@ -24,13 +27,16 @@ def getSourceAndCopy():
     shell.SendKeys('^c')
 
 def getSource():
-    webbrowser.open(url)
-    time.sleep(0.5)
-    getSourceAndCopy()
-    time.sleep(0.1)
-    win32clipboard.OpenClipboard()
-    data = win32clipboard.GetClipboardData()
-    win32clipboard.CloseClipboard()
+    if atWork:
+        webbrowser.open(url)
+        time.sleep(0.5)
+        getSourceAndCopy()
+        time.sleep(0.1)
+        win32clipboard.OpenClipboard()
+        data = win32clipboard.GetClipboardData()
+        win32clipboard.CloseClipboard()
+    else:
+        data = requests.get(url).text
     return data
 
 
@@ -104,7 +110,10 @@ def dumpitStraight():
     aloha = getSource()
     r = re.compile("charset=utf-8;base64,(.*?)'")
     r2 = re.compile("<h1>Captcha</h1><p>(.*?)</p><html><body>")
+    r3 =re.compile('name="token" value="(.*?)"><input')
     captcha = r2.findall(aloha)[0]
+    token = r3.findall(aloha)[0]
+    print token
     dumpTofFile(r.findall(aloha)[0], fn = 'test.ttf')
     diciNew = retCoordsMap('test.ttf')
     diciFin = findCharMapping(diciOrig, diciNew)
@@ -112,9 +121,11 @@ def dumpitStraight():
     for k,v in diciFin.iteritems():
         captcha = captcha.replace(k, v)
     print "Captcha: %s"%captcha
-    
+
+    tmp = eval(captcha)
     print "Total time: %d" %(time.time() - t)
-    
-    return eval(captcha)
+    data={'token': int(token), 'answer': str(tmp)}
+    print requests.post(url, data=data).text
+    return str(tmp)
     
 
