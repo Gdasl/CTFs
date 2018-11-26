@@ -1,0 +1,23 @@
+import gmpy2
+
+def fermat_factors(n):
+	assert n % 2 != 0
+
+	a = gmpy2.isqrt(n)
+	b2 = gmpy2.square(a) - n
+
+	while not gmpy2.is_square(b2):
+		a += 1
+		b2 = gmpy2.square(a) - n
+
+	factor1 = a + gmpy2.isqrt(b2)
+	factor2 = a - gmpy2.isqrt(b2)
+	return int(factor1), int(factor2) 
+
+e = 31337
+n = int("""00e23be11172dea8a4d3a357aa50a28f0b7790c9a2a5ee12ce965b010920cc0193a74e30b753f743c46900579de28d22dd870640008109cece1b83bfdfcd3b7146e2d666c705b37627168f7b9e1e957deeb748a308dad6af7a0c3906657f4a5d1fbc17f8abbeee28d7747f7a78995985686e5c23324bbf4ec0e85a6de370bf7710bffc01f685d9a844105832a97518d5d1a2be47e2276af49a33f84908608bd45fb43a84bfa1aa4a4c7d3ecf4f5f6c765ea04b37919edc22e66dce141a8e6acbfecdb3146417c75b299e32bff2eefad30b42d4abb74132da0cd4eff881d5bb8d583fb51be84928a270da3104ddf7b216f24c0a4e07a8ed4a3d5eb57fa390c3af27""",16)
+n2 = int("00cd214d785e7a70415ba7021333552fa5c11c63e4af351cfb523e9df02f9671fe1c9137f185e391f678614129fbd411fee38acead9bf23c48dffb68de38a7401ead1e77a7303652df0d0a3a716ccb8917a5ef636caffe0fedbb76598c120a9ff22047f3b277815239da438c650cf16d7645269e8905070b50ee3182b09cfa2e0e28f3a1d3173c36bb3bdd6c6a15bceedea52a74bb13d0a035d92ee65c454ce7b8f3421cf7277e72524d659e9d36d9f061faca6aac72650032043d1236c93859ea5e943f950688c38cddcc73baccc01ebb4c39ead4c622408fe50dff21f54ce9b5ed621ff3d0c57d2931f2f143b6dc8f1ecba0be9b21ddcdf776bfdbeb03dd1a4b",16)
+
+p, q = fermat_factors(n)
+print "p =", p
+print "q =", q
