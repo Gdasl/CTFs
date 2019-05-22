@@ -11,7 +11,7 @@ Additional disclaimer: to avoid any issues with copyright, I only link to writeu
 ## 1. Crypto
 
   ###   1.1 RSA et al.
-  [Harekaze](https://github.com/pcw109550/write-up/tree/master/2019/Harekaze/Now_We_Can_Play) by [GoN](https://ctftime.org/team/1288)
+  [Now We Can Play!!](https://github.com/pcw109550/write-up/tree/master/2019/Harekaze/Now_We_Can_Play) by [GoN](https://ctftime.org/team/1288)
   
   ### 1.2 ECC
 [Mike's Marverlous Mystery Curves](https://chrsow.me/2019/03/05/tamuctf-2019-mike-curve.html) by [h0ldth3d00r](https://ctftime.org/team/59032)
