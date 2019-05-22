@@ -28,6 +28,7 @@ Note that most of the challenges shown here are challenges that I have attempted
 ## Forensics
 ### Memory/File dumps
 [Volatile virus](https://www.aperikube.fr/docs/tjctf_2018/virusvolatile/) by [Apericube](https://www.aperikube.fr/)
+
 [Lost in the Forest](https://gitlab.com/ketz/ctfs/blob/master/2018/icec.tf/lost-in-the-forest.md) by [Naranka's Team](https://ctftime.org/team/63642)
 
 ### Blockchain
@@ -35,10 +36,12 @@ Note that most of the challenges shown here are challenges that I have attempted
 
 ### PCAPs
 [Moar turtles](https://www.aperikube.fr/docs/tjctf_2018/moarturtles/) by [Apericube](https://www.aperikube.fr/)
+
 [Ssleepy](https://github.com/TheRealOddCoder/tjctf2018/tree/master/Ssleepy) by [rawsec](https://ctftime.org/team/27232)
 
 ### Image files (PNG, JPG, GIF)
 [Modern Picasso](https://gitlab.com/snippets/1753982) by [Naranka's Team](https://ctftime.org/team/63642)
+
 [I heard you like files](https://ethan-world.tistory.com/entry/TAMUctf-19-Writeup-I-heard-you-like-files) by [ROK_ScriptKiddie](https://ctftime.org/team/75857)
 
 ### Audio files
@@ -48,7 +51,9 @@ Note that most of the challenges shown here are challenges that I have attempted
 
 ### ELF
 [Locked out](https://github.com/d4rkvaibhav/IceCTF-2018/tree/master/Reverse) by [dummy_team](https://ctftime.org/team/54709)
+
 [ReversingErirefvat](https://medium.com/@noobintheshell/tamuctf2019-writeups-2-9e230784e68e) by [noobintheshell](https://ctftime.org/team/70917) 
+
 [Obfuscaxor](https://medium.com/@noobintheshell/tamuctf2019-writeups-2-9e230784e68e) by [noobintheshell](https://ctftime.org/team/70917) 
 
 ### EXE
@@ -59,20 +64,25 @@ Note that most of the challenges shown here are challenges that I have attempted
 ## Web
 ### XSS
 [Stupid blog](https://www.aperikube.fr/docs/tjctf_2018/stupid_blog/) by [Apericube](https://www.aperikube.fr/)
+
 [History of Computing](https://ctftime.org/writeup/11122) by [PwnaSonic](https://ctftime.org/team/21256)
 
 ## Misc
 ### PyJails
 [The Abyss](https://blog.seekintoo.com/the-abyss-writeup.html) by [bolgia4](https://ctftime.org/team/36002)
+
 [Mirror Mirror](https://github.com/Gdasl/tjctf/blob/master/Mirror%20Mirror.md) by me
 
 ### Machine learning
 [Learn my flag](https://github.com/TheRealOddCoder/tjctf2018/tree/master/Learn_My_Flag) by [rawsec](https://ctftime.org/team/27232)
+
 [Hot or not](https://github.com/shiltemann/CTF-writeups-public/blob/master/IceCTF-2018/writeup.md#steganography-300-hot-or-not) by [Galaxians](https://ctftime.org/team/28395)
 
 ### Unknown file types
 [Grid parser](https://github.com/Gdasl/tjctf/blob/master/Grid%20Parser.md) by me
+
 [ilovebees](https://github.com/Gdasl/CTFs/blob/master/IceCTF/Misc/Ilovebees.md) by me
+
 [Hard shells](https://github.com/Gdasl/CTFs/edit/master/IceCTF/Forensics/harshells.md) by me
 
 ### Git
@@ -94,6 +104,8 @@ Note that most of the challenges shown here are challenges that I have attempted
 
 ## Steganography
 [PIT or Miss](https://www.aperikube.fr/docs/tjctf_2018/pitormiss/) by [Apericube](https://www.aperikube.fr/)
+
 [Drumbone](https://github.com/shiltemann/CTF-writeups-public/blob/master/IceCTF-2018/writeup.md#steganography-150-drumbone) by [Galaxians](https://ctftime.org/team/28395)
+
 ### steghide
 [Rabbit hole](https://github.com/Gdasl/CTFs/blob/master/IceCTF/Stego/Rabbithole.md) by me
