@@ -1,8 +1,10 @@
 # CTF Writeups
 
-Thi is something I've been wanting to do for a while but never found the time (lame excuse). As a team of one, at least at the time of inception, I need to cover all categories of challenges during a given CTF. Oftentimes, I'll remember having seen a challenge already in a previous CTF but don't exactly remember which one or when. It also often turns out tht the challenges are similar enough that solving one essentially paves the way to solving the other. This is especially useful for categories at which I don't excell. I realized I wasted a lot of time on searching around, time that could be better spent pwning. Thus, I am creating this lookup list of writeups links, most by others, some by me. They will be organized by category and, over time and if need be, by sub-categories (ex: Crypto/RSA, Crypto/ECC).
+This is something I've been wanting to do for a while but never found the time (lame excuse). As a team of one, at least at the time of inception, I need to cover all categories of challenges during a given CTF. Oftentimes, I'll remember having seen a challenge already in a previous CTF but don't exactly remember which one or when. It also often turns out tht the challenges are similar enough that solving one essentially paves the way to solving the other. This is especially useful for categories at which I don't excell. I realized I wasted a lot of time on searching around, time that could be better spent pwning. Thus, I am creating this lookup list of writeups links, most by others, some by me. They will be organized by category and, over time and if need be, by sub-categories (ex: Crypto/RSA, Crypto/ECC).
 
-Note that most of the challenges shown here are challenges that I have attempted myself but potentially haven't solved during the competition. As such, it might be lighter on categories such as pwn. But I will try to expand as well.
+Note that most of the challenges shown here are challenges that I have attempted myself but potentially haven't solved during the competition. As such, it might be lighter on categories such as pwn. But I will try to expand as well. 
+
+Additional disclaimer: to avoid any issues with copyright, I only link to writeup. Most should be stable (ctftime/github) but somer are links to team blogs which may or may not be up forever. If for some reason you don't want your work linked, just let me know.
 
 # List
 
@@ -96,6 +98,9 @@ Super useful python lib to solve tedious reversing tasks that check for correct 
 #### 4.2.1 SQLi
 
 [SQLite Voting](https://gist.github.com/terjanq/a571826c6bb08ae0dfa4ef57e03b5b72) by [justCatTheFish](https://ctftime.org/team/33893)
+
+### 4.3 PHP
+[Encode and encode](https://blog.xarkangels.com/ctf/harekazectf2019/encode_and_encode/) by [Petir Cyber Security](https://ctftime.org/team/64958)
 
 ---
 ## 5. Misc
