@@ -9,10 +9,12 @@ Note that most of the challenges shown here are challenges that I have attempted
 ## 1. Crypto
 
   ###   1.1 RSA et al.
-  [Harekaze](https://github.com/pcw109550/write-up/tree/master/2019/Harekaze/Now_We_Can_Play) by [GoN}(https://ctftime.org/team/1288)
+  [Harekaze](https://github.com/pcw109550/write-up/tree/master/2019/Harekaze/Now_We_Can_Play) by [GoN](https://ctftime.org/team/1288)
   
   ### 1.2 ECC
 [Mike's Marverlous Mystery Curves](https://chrsow.me/2019/03/05/tamuctf-2019-mike-curve.html) by [h0ldth3d00r](https://ctftime.org/team/59032)
+
+[Show me your private key](https://github.com/pcw109550/write-up/tree/master/2019/Harekaze/show_me_your_private_key) by [GoN](https://ctftime.org/team/1288)
 
   ### 1.3 AES
 
@@ -24,6 +26,9 @@ Note that most of the challenges shown here are challenges that I have attempted
 
 ### 1.6 Misc crypto
 [Ancient Foreign Communications](https://gitlab.com/Naraka/ctf/tree/master/IceCTF-2018/Crypto/crypto3) by [Naranka's Team](https://ctftime.org/team/63642)
+
+### 1.7 Classic ciphers
+{Hill} [Once upon a time](https://github.com/Hong5489/HareKazeCTF/tree/master/once_upon_a_time) by [(666)](https://github.com/Hong5489/HareKazeCTF/tree/master/once_upon_a_time)
 
 
 
@@ -87,6 +92,10 @@ Super useful python lib to solve tedious reversing tasks that check for correct 
 
 [History of Computing](https://ctftime.org/writeup/11122) by [PwnaSonic](https://ctftime.org/team/21256)
 
+### 4.2 SQL
+#### 4.2.1 SQLi
+
+[SQLite Voting](https://gist.github.com/terjanq/a571826c6bb08ae0dfa4ef57e03b5b72) by [justCatTheFish](https://ctftime.org/team/33893)
 
 ---
 ## 5. Misc
