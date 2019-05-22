@@ -32,6 +32,8 @@ Additional disclaimer: to avoid any issues with copyright, I only link to writeu
 ### 1.7 Classic ciphers
 {Hill} [Once upon a time](https://github.com/Hong5489/HareKazeCTF/tree/master/once_upon_a_time) by [(666)](https://github.com/Hong5489/HareKazeCTF/tree/master/once_upon_a_time)
 
+{Nihilist}[The Note](https://ctftime.org/writeup/10210) by [EmpireCTF](https://ctftime.org/team/57176)
+
 
 
 ---
@@ -91,6 +93,8 @@ Super useful python lib to solve tedious reversing tasks that check for correct 
 ## 4. Web
 ### 4.1 XSS
 [Stupid blog](https://www.aperikube.fr/docs/tjctf_2018/stupid_blog/) by [Apericube](https://www.aperikube.fr/)
+
+[Excess Ess 1](http://thinkloveshare.blogspot.com/2018/06/writeup-securityfest-excess-ess-1.html) by [Apericube](https://www.aperikube.fr/)
 
 [History of Computing](https://ctftime.org/writeup/11122) by [PwnaSonic](https://ctftime.org/team/21256)
 
