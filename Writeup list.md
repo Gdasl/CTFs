@@ -6,11 +6,11 @@ Note that most of the challenges shown here are challenges that I have attempted
 
 # List
 
-
 ## 1. Crypto
 
-  ###   1.1 RSA
-
+  ###   1.1 RSA et al.
+  [Harekaze](https://github.com/pcw109550/write-up/tree/master/2019/Harekaze/Now_We_Can_Play) by [GoN}(https://ctftime.org/team/1288)
+  
   ### 1.2 ECC
 [Mike's Marverlous Mystery Curves](https://chrsow.me/2019/03/05/tamuctf-2019-mike-curve.html) by [h0ldth3d00r](https://ctftime.org/team/59032)
 
@@ -53,6 +53,7 @@ Note that most of the challenges shown here are challenges that I have attempted
 ---
 ## 3. Reverse
 
+
 ### 3.1 ELF
 [Locked out](https://github.com/d4rkvaibhav/IceCTF-2018/tree/master/Reverse) by [dummy_team](https://ctftime.org/team/54709)
 
@@ -60,10 +61,23 @@ Note that most of the challenges shown here are challenges that I have attempted
 
 [Obfuscaxor](https://medium.com/@noobintheshell/tamuctf2019-writeups-2-9e230784e68e) by [noobintheshell](https://ctftime.org/team/70917) 
 
+#### 3.1.1 Angr
+Super useful python lib to solve tedious reversing tasks that check for correct input (like keycheckers)
+
+[Scramble](https://github.com/wani-hackase/wani-writeup/tree/master/2019/05-harekaze/rev-scramble) by [Wani Hackase]
+
+
+
+
 ### 3.2 EXE
 
 ### 3.3 Android
 [Poke a mango](http://www.wagiro.com/archivos/546) by [ID-10-T](https://ctftime.org/team/50611)
+
+### 3.4 Python
+
+### 3.5 Perl
+[Twenty-five](https://github.com/swv-l/writeups/blob/master/harekaze-2019-40-twenty-five.md) by [SWV_L](https://ctftime.org/team/81089)
 
 
 ---
