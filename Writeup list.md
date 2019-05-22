@@ -25,6 +25,9 @@ Note that most of the challenges shown here are challenges that I have attempted
 ### 1.6 Misc crypto
 [Ancient Foreign Communications](https://gitlab.com/Naraka/ctf/tree/master/IceCTF-2018/Crypto/crypto3) by [Naranka's Team](https://ctftime.org/team/63642)
 
+
+
+---
 ## 2. Forensics
   ### 2.1 Memory/File dumps
 [Volatile virus](https://www.aperikube.fr/docs/tjctf_2018/virusvolatile/) by [Apericube](https://www.aperikube.fr/)
@@ -47,6 +50,7 @@ Note that most of the challenges shown here are challenges that I have attempted
 ### 2.5 Audio files
 [SOS](https://github.com/shawnduong/ctf-writeups/blob/master/2019-TJ/Forensics/sos.md) by [IrisCS](https://ctftime.org/team/72776)
 
+---
 ## 3. Reverse
 
 ### 3.1 ELF
@@ -61,12 +65,16 @@ Note that most of the challenges shown here are challenges that I have attempted
 ### 3.3 Android
 [Poke a mango](http://www.wagiro.com/archivos/546) by [ID-10-T](https://ctftime.org/team/50611)
 
+
+---
 ## 4. Web
 ### 4.1 XSS
 [Stupid blog](https://www.aperikube.fr/docs/tjctf_2018/stupid_blog/) by [Apericube](https://www.aperikube.fr/)
 
 [History of Computing](https://ctftime.org/writeup/11122) by [PwnaSonic](https://ctftime.org/team/21256)
 
+
+---
 ## 5. Misc
 ### 5.1 PyJails
 [The Abyss](https://blog.seekintoo.com/the-abyss-writeup.html) by [bolgia4](https://ctftime.org/team/36002)
@@ -92,16 +100,18 @@ Note that most of the challenges shown here are challenges that I have attempted
 [Anticaptcha](https://github.com/Gdasl/CTFs/blob/master/IceCTF/Misc/Anticaptcha.md) by me
 
 
-
+---
 ## 6. Pwn
 [Twitter](https://ctftime.org/writeup/11047) by [redpwn](https://ctftime.org/team/59759)
 
 ### 6.1 Python
 [Veggie Tales](https://github.com/its20pastday/tamuctf-writeup/blob/master/veggie-tales.md) by [HitoriDa](https://ctftime.org/team/74005)
 
+
+---
 ## Network
 
-
+---
 ## 7. Steganography
 [PIT or Miss](https://www.aperikube.fr/docs/tjctf_2018/pitormiss/) by [Apericube](https://www.aperikube.fr/)
 
