@@ -53,6 +53,7 @@ Additional disclaimer: to avoid any issues with copyright, I only link to writeu
 
 ### 2.4 Image files (PNG, JPG, GIF)
 [Modern Picasso](https://gitlab.com/snippets/1753982) by [Naranka's Team](https://ctftime.org/team/63642)
+[Hydra](https://github.com/Gdasl/CTFs/tree/master/Securityfest2019) by me
 
 [I heard you like files](https://ethan-world.tistory.com/entry/TAMUctf-19-Writeup-I-heard-you-like-files) by [ROK_ScriptKiddie](https://ctftime.org/team/75857)
 
