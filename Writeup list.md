@@ -43,6 +43,8 @@ Additional disclaimer: to avoid any issues with copyright, I only link to writeu
 
 [Lost in the Forest](https://gitlab.com/ketz/ctfs/blob/master/2018/icec.tf/lost-in-the-forest.md) by [Naranka's Team](https://ctftime.org/team/63642)
 
+[memory_lane](https://vijeta1.github.io/SecurityFestCTF-Writeups/) by [NULLKrypt3rs](https://ctftime.org/team/45761)
+
   ### 2.2 Blockchain
 [We will rock you](https://www.aperikube.fr/docs/tjctf_2018/wewillrockyou/) by [Apericube](https://www.aperikube.fr/)
 
