@@ -105,9 +105,13 @@ Super useful python lib to solve tedious reversing tasks that check for correct 
 [History of Computing](https://ctftime.org/writeup/11122) by [PwnaSonic](https://ctftime.org/team/21256)
 
 ### 4.2 SQL
+
+[Product manager](https://github.com/AidanFray/CTF_Writeups/blob/master/2019/FacebookCTF/products_manager/README.md) by [RISS](https://ctftime.org/team/68942)
+
 #### 4.2.1 SQLi
 
 [SQLite Voting](https://gist.github.com/terjanq/a571826c6bb08ae0dfa4ef57e03b5b72) by [justCatTheFish](https://ctftime.org/team/33893)
+
 
 ### 4.3 PHP
 [Encode and encode](https://blog.xarkangels.com/ctf/harekazectf2019/encode_and_encode/) by [Petir Cyber Security](https://ctftime.org/team/64958)
@@ -136,6 +140,10 @@ Super useful python lib to solve tedious reversing tasks that check for correct 
 
 ### 5.5 Parsers/Scrapers
 [Anticaptcha](https://github.com/Gdasl/CTFs/blob/master/IceCTF/Misc/Anticaptcha.md) by me
+
+### 5.6 Uncategorized
+
+[Homework assigment](https://k3ramas.blogspot.com/2019/06/facebook-ctf-2019.html) by [k3ramas](https://k3ramas.blogspot.com/)
 
 
 ---
