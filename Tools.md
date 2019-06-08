@@ -24,9 +24,13 @@ I am a foregtful person. Oftentime, I will use a tool for some task and then for
 
 - Stegsolve
 
+- zsteg (to extract LSB)
+
 ### Image encryption
 
 - steghide
+
+- https://futureboy.us/stegano/decinput.html
 
 
 ---
