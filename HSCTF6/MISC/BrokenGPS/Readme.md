@@ -14,7 +14,7 @@ Output format:
 
 This was very straightforward. Essentially, Ella's movements are mirrored symetrically i.e. she will end up at (-x,-y) from her original destination and the distance will simply be ```2*sqrt(x**2+y**2)```, a simplified shortest distance formula. The script outputs the correct answer.
 
-```
+```python
 from math import sqrt
 
 #smolstep = sqrt(2)/2
