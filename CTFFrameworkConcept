@@ -1,0 +1,65 @@
+TODO:
+
+General
+- Pattern recognition
+-- Base64
+-- Base32
+-- Hex
+-- flags
+-- Words
+- Encodings
+-- all bases
+-- rot13
+
+
+Socket interaction
+- recvline
+- recvlines
+- recvutil
+- sendline
+
+Crypto
+- AES
+-- CBC
+-- ECB
+- RSA
+-- Factorisation
+-- Common modulus
+-- Fault
+-- Coppersmith
+- ECC
+- DES
+- Common ciphers
+-- Caesar
+-- Railcipher
+-- Vigenere
+
+
+
+Web
+- Flask
+- Nodejs
+-- Handlebar
+- XSS
+- WoofWAF
+
+Forensics
+- Images
+-- LSB
+-- MSB
+-- exiftool
+-- XOR
+- Audio
+
+Misc
+- Pyjails
+- Bashjails
+- Esolangs
+- Embedded files
+-- binwalk
+- Memdumps
+-- Vola
+- OCR
+- QR
+
+
