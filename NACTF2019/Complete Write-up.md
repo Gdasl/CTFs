@@ -370,7 +370,7 @@ bool __cdecl sub_804928C(char *s)
 }
 ```
 
-Looks like this is it. It takes the input string, makes sure the beginning is ```nactf{```, that the end is ```}``` and then ```sub_80491B6``` on the middle part, checking if it equals ```21380291284888LL```. The idea here is easy: since we know ```v3``` is multiplied by 63 each time, substracting the correct number from the result should yield a number that is divisible by 62. And so on. Full script:
+Looks like this is it. It takes the input string, makes sure the beginning is ```nactf{```, that the end is ```}``` and then ```sub_80491B6``` on the middle part, checking if it equals ```21380291284888LL```. The idea here is easy: since we know ```v3``` is multiplied by 62 each time, substracting the correct number from the result should yield a number that is divisible by 62. And so on. Full script:
 
 ```python
 target = 21380291284888L
