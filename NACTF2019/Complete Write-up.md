@@ -1,6 +1,10 @@
 # NACTF Write-up
 
-## General skills
+##### Table of Contents  
+[General skills](#general skills)  
+[Crypto](#crypto)  
+
+## I General skills
 
 ### 1. Intro to flags (10, 1136 solves)
 ... just input the flag
@@ -120,5 +124,7 @@ I suggest doing this one on paper, it's a fun exercise and goes relatively fast 
 Again, probably a bunch of ways to solve this. An easy one is to use backquote subsitution, which will evaluate whatever is in the backquote. So a possible answer would be ``` `cat flag.txt` ```.
 
 
+
+## II Crypto
 
 
