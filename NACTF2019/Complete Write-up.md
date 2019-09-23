@@ -434,9 +434,10 @@ We get 3 password protected zipfiles. If you get a ```zip``` or ```rar``` immedi
 We get a broken PDF, as evidenced by the header that is all messed up. All you need to do is use a hexeditor to replace the first line, ```31 2E 33 0A 25 C4 E5 F2 E5 EB A7 F3 A0 D0 C4 C6``` with ```25 50 44 46 2D 31 2E 35 0A 25 B5 ED AE FB 0A```. I like to use HexEdit but it's a free country and any hexeditor will do. Doing so makes the PDF readable again.
 
 ### 6. Kellen's PDF sandwich (150, 290 solves)
-
+We get a PDF that seems corrupted. Inspecting it with ```binwalk``` reveals a second PDF in there. Opening the file wiht a hex editor and searchinf for ```PDF``` and ```EOF``` (the end of file marker), shows us where it is. Using HexEdit I can simply cut and paste the bytes in a new empty file and thus yield 2 valid PDFs.
 
 ### 7. Filesystem Image (200, 411 solves)
+This one is easy using 7zip gui. W
 
 ### 8. Phuzzy Photo (250, 204 solves)
 
