@@ -131,7 +131,7 @@ Again, probably a bunch of ways to solve this. An easy one is to use backquote s
 
 ## II Crypto
 
-### 1. Vyom's Soggy Croutons (50, 1012 solves)Loony Tunes
+### 1. Vyom's Soggy Croutons (50, 1012 solves)
 Simple caesar cipher. Use your solver of choice. I like [quipiquip](https://quipqiup.com/)
 
 ### 2. Loony Tunes (50, 770 solves)
