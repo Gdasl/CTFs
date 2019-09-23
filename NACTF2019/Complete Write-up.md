@@ -1,12 +1,14 @@
 # NACTF Write-up
 
 ##### Table of Contents  
-[I General skills](#i-general-skills)  (Cellular evolution 3 missing)
-[II Crypto](#ii-crypto)  (Randomizer 2 missing)
+[I General skills](#i-general-skills) 
+[II Crypto](#ii-crypto)
 [III Reverse engineering](#iii-reverse-engineering) 
 [IV Forensics](#iv-forensics)  
 [V Web](#v-web-exploitation)  
-[VI Pwn](#vi-pwn)  (loopy0, loopy1 missing)
+[VI Pwn](#vi-pwn)
+
+Missing tasks: Randomizer 2, Cell 2, loopy0,1
 
 ## I General skills
 
