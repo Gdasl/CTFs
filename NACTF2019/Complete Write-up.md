@@ -413,7 +413,44 @@ for i in range(8):
 
 ## IV Forensics
 
+### 1. Least Significant Avenger (50, 623 solves)
+I discovered a very nice [website](https://georgeom.net/StegOnline/image) to solve simple stego challs a while ago. Simply upload the image and navigate to "Extract data". Extracting the lsb for rgb will yield the flag.
+
+### 2. The MetaMeme (75, 716 solves)
+I mean, every single forensics challenge should have you open the file in a hexeditor as a first step. Doing this in this case and simply searching for ```nactf{``` shows the flag.
+
+### 3. My Ears Hurt (75, 301 solves)
+First we need to convert the file to mp4 or any non-aiff format. I used some random website. Once you have it in a useable format, open up the file in audacity. You will see this:
+
+![canyouhearme](https://github.com/Gdasl/CTFs/raw/master/NACTF2019/Images/canyouhearme.PNG)
+
+This is obviously morse code. I have my own library for this but any online decoder will do. Thin lines are dots, larger bands are dahses.
+
+
+### 4. Unzip Me (150, 468 solves)
+We get 3 password protected zipfiles. If you get a ```zip``` or ```rar``` immediately think [John the Ripper](https://www.openwall.com/john/). Moreover, remember that most people are unimaginative and will use real words as their passwords. There is a nice list that everyone should know called ```rockyou.txt```. You can find many repos hosting it. In this case we first need to extract the hashes from the zip by doing ```zip2john [zipname] > [whateveryouwant]```, then ```john --wordlist=rockyou.txt [whateveryouwant]```. This gives us 3 passwords, 1 for each archive, which each contain a pdf containing part of the flag. Easy peasy.
+
+### 5. Kellen's Broken File (150, 584 solves)
+We get a broken PDF, as evidenced by the header that is all messed up. All you need to do is use a hexeditor to replace the first line, ```31 2E 33 0A 25 C4 E5 F2 E5 EB A7 F3 A0 D0 C4 C6``` with ```25 50 44 46 2D 31 2E 35 0A 25 B5 ED AE FB 0A```. I like to use HexEdit but it's a free country and any hexeditor will do. Doing so makes the PDF readable again.
+
+### 6. Kellen's PDF sandwich (150, 290 solves)
+
+
+### 7. Filesystem Image (200, 411 solves)
+
+### 8. Phuzzy Photo (250, 204 solves)
+
+### 9. File recovery (300, 388 solves)
+
 ## V Web exploitation
+
+### 1. Pink Panther (50, 1055 solves)
+
+### 2. Scooby Doo (100, 937 solves)
+
+### 3. Dexter's Lab (125, 783 solves)
+
+### 4. Sesame Street (150, 693 solves)
 
 ## VI Pwn
 
