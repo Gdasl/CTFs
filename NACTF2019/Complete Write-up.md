@@ -1,8 +1,8 @@
 # NACTF Write-up
 
 ##### Table of Contents  
-[General skills](#general skills)  
-[Crypto](#crypto)  
+[General skills](#i-general-skills)  
+[Crypto](#ii-crypto)  
 
 ## I General skills
 
