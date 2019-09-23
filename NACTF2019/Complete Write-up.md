@@ -53,9 +53,7 @@ This yields a link where to some image that is very small. You need to change th
 ### 10. Cellular Evolution #1: Weepinbell
 Full disclosure: one of the last challenges I solved. It took a while to wrap my head around it. Essentially, this is like minesweeper as I believe one of the hints mentioned. The ```sum8``` function sums all 8 surrounding cells like so:
 
-```
-
-```
+![alt text](NACTF2019/Images/cellPrinciple.png)
 
 
 
