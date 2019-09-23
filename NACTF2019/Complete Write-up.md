@@ -339,7 +339,7 @@ __int64 __cdecl sub_80491B6(_BYTE *a1)
 }
 ```
 
-Hm it look as if it performs some kind of hashing. It sets v3 to 0, then takes a string as an input and loops through the first 8 chars. If the char is an uppercase letter (ASCII ord between 64 and 90), add the position of the letter in the charset to v3. So if it's ```A``` it will add 0, if ```B``` 1 etc. The logic for lowercase (96 to 112) and digits (47 to 57) is the same. After each loops it multiplies v3 by 64.
+Hm it look as if it performs some kind of hashing. It sets v3 to 0, then takes a string as an input and loops through the first 8 chars. If the char is an uppercase letter (ASCII ord between 64 and 90), add the position of the letter in the charset to v3. So if it's ```A``` it will add 0, if ```B``` 1 etc. The logic for lowercase (96 to 112) and digits (47 to 57) is the same. After each loops it multiplies v3 by 62.
 
 So who calls that function. We can select it in the IDA view and hit ```X``` which shows us the references. And it looks like ```sub_804928C``` calls it. Here's the code for that one:
 
@@ -370,7 +370,7 @@ bool __cdecl sub_804928C(char *s)
 }
 ```
 
-Looks like this is it. It takes the input string, makes sure the beginning is ```nactf{```, that the end is ```}``` and then ```sub_80491B6``` on the middle part, checking if it equals ```21380291284888LL```. The idea here is easy: since we know ```v3``` is multiplied by 63 each time, substracting the correct number from the result should yield a number that is divisible by 63. And so on. Full script:
+Looks like this is it. It takes the input string, makes sure the beginning is ```nactf{```, that the end is ```}``` and then ```sub_80491B6``` on the middle part, checking if it equals ```21380291284888LL```. The idea here is easy: since we know ```v3``` is multiplied by 63 each time, substracting the correct number from the result should yield a number that is divisible by 62. And so on. Full script:
 
 ```python
 target = 21380291284888L
