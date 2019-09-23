@@ -1,8 +1,12 @@
 # NACTF Write-up
 
 ##### Table of Contents  
-[General skills](#i-general-skills)  
-[Crypto](#ii-crypto)  
+[I General skills](#i-general-skills)  
+[II Crypto](#ii-crypto)  
+[III Reverse engineering](#iii-reverse-engineering)  
+[IV Forensics](#iv-forensics)  
+[V Web](#v-web-exploitation)  
+[VI Pwn](#vi-pwn)  
 
 ## I General skills
 
@@ -126,5 +130,188 @@ Again, probably a bunch of ways to solve this. An easy one is to use backquote s
 
 
 ## II Crypto
+
+### 1. Vyom's Soggy Croutons (50, 1012 solves)Loony Tunes
+Simple caesar cipher. Use your solver of choice. I like [quipiquip](https://quipqiup.com/)
+
+### 2. Loony Tunes (50, 770 solves)
+Another subsitution cipher. There are multiple ways to solve this. The simplest way it to recognize that this is a [pigpen cipher](https://en.wikipedia.org/wiki/Pigpen_cipher) and simply transcribe. But even without getting the hint you can just assign each symbol to an abitrary letter and solve using a subsitution cipher bruter like quipquip.
+
+### 3. Dr. J's Group Test Randomizer: Board Problem #0 (100, 381 solves)
+We get a nice long .c file that is some kind of simplified implementation of the [Middle square method](https://en.wikipedia.org/wiki/Middle-square_method). The real implementation actually comes to shine in random3, which I didn't solve in time. Anywho, the only bit we are interested in is the following:
+
+```c
+uint64_t nextRand() {
+  // Keep the 8 middle digits from 5 to 12 (inclusive) and square.
+  seed = getDigits(seed, 5, 12);
+  seed *= seed;
+  return seed;
+}
+```
+
+Basically this is a simple series where ```nextRand()``` is dependend on the previous ```nextRand()```. We can reimplement this in python:
+
+```
+def digi(d):
+    return int(str(d)[4:12])**2
+```
+
+And this gets us the correct next number. Full script:
+
+```python
+
+add = 'shell.2019.nactf.com 31425'
+
+s = STTSocket(add)
+
+print s.recv(2048)
+print s.recv(2048)
+
+def digi(d):
+    return int(str(d)[4:12])**2
+
+
+def getDigi():
+    s.send('r')
+    time.sleep(0.5)
+    tmp = s.recvline().strip('\n').strip(' ').strip('>')
+    return int(tmp)
+    
+
+d0 = getDigi()
+
+s.sendline('g')
+time.sleep(1)
+print s.recv(2048)
+
+
+for i in range(20):
+    d0 = digi(d0)
+    s.sendline(d0)
+    time.sleep(0.5)
+    print s.recv(2048)
+```
+
+
+
+
+### 4. Reversible Sneaky Algorithm #0 (125, 405 solves)
+Essentially intro to RSA. ```c``` is the ciphertext, ```n``` the modulus and ```d``` the private key. All you need is there:
+
+```hex(pow(c,d,n)))[2:-1].decode('hex')```
+
+### 5. Super Duper AES (250, 139 solves)
+This was a fun function. It's a simple implementation of a permutation/substitution. It first convert the string to hex, pads it to a multiple of 4 bytes and breaks it in blocks of 4 bytes, i.e. 8 hex digits. Then there are 2 functions:
+
+```
+def substitute(hexBlock):
+    substitutedHexBlock = ""
+    substitution =  [8, 4, 15, 9, 3, 14, 6, 2,
+                    13, 1, 7, 5, 12, 10, 11, 0]
+    for hexDigit in hexBlock:
+        newDigit = substitution[int(hexDigit, 16)]
+        substitutedHexBlock += hex(newDigit)[2:]
+    return substitutedHexBlock
+    
+def permute(hexBlock):
+    permutation =   [6, 22, 30, 18, 29, 4, 23, 19,
+                    15, 1, 31, 11, 28, 14, 25, 2,
+                    27, 12, 21, 26, 10, 16, 0, 24,
+                     7, 5, 3, 20, 13, 9, 17, 8]
+    block = int(hexBlock, 16)
+    permutedBlock = 0
+    for i in range(32):
+        bit = (block & (1 << i)) >> i
+        permutedBlock |= bit << permutation[i]
+    return hexpad(hex(permutedBlock)[2:])    
+```
+
+It doesn't really matter how many times you perform them, once you reverse them it's easy. So the first one simply substitutes hex digits. If the hex digit is 0, the new digit will be 8 etc. A nice way to reverse it:
+
+```
+sub2 = [substituion.index(i) for i in range(16)]
+```
+
+your ```substituteRev``` function will be the same as ```substitute``` with the reverse array. And guess what, same thing for ```permuteRev```. All that is left is to reverse the main function (roundRev). The final solution looks like this:
+
+```
+def revsub(hexBlock):
+    substitutedHexBlock = ""
+    sub2 = [15, 9, 7, 4, 1, 11, 6, 10, 0, 3, 13, 14, 12, 8, 5, 2]
+
+    return ''.join([hex(sub2[int(i,16)])[2:] for i in hexBlock])
+
+def revPermute(hexBlock):
+    permutation =   [22, 9, 15, 26, 5, 25, 0,
+                     24, 31, 29, 20, 11, 17, 28, 13, 8, 21, 30, 3, 7, 27,
+                     18, 1, 6, 23, 14, 19, 16, 12, 4, 2, 10]
+    block = int(hexBlock, 16)
+    permutedBlock = 0
+    for i in range(32):
+        bit = (block & (1 << i)) >> i
+        permutedBlock |= bit << permutation[i]
+    return hexpad(hex(permutedBlock)[2:])
+    
+ def revRound(hexMessage):
+    numBlocks = len(hexMessage)//8
+    permutedHexMessage = ""
+    
+    for i in range(numBlocks):
+        permutedHexMessage += hexpad(revPermute(hexMessage[8*i:8*i+8]).replace('L',''))
+
+    substitutedHexMessage = ""
+    
+    for i in range(numBlocks):
+        substitutedHexMessage += hexpad(revsub(permutedHexMessage[8*i:8*i+8]).replace('L',''))
+     
+
+    return substitutedHexMessage
+
+hexMessage = enc
+for i in range(10000):
+    hexMessage = revRound(hexMessage)
+```
+
+### 6. Reversible Sneaky Algorithm #1 (275, 242 solves)
+This one might have a more elegant solution but why go big when you can go home? We know that the flag is ```nactf{abcd}``` where ```a,b,c,d``` are all lowercase letters. So there are only ```26**4 = 456976``` possibilities. We have ```n``` and ```e```. We can just encrypt all possibilities until our encrypted text matches the given cipher.
+
+
+### 7. Dr. J's Group Test Randomizer: Board Problem #1 (300, 131 solves)
+We get a similar .c file as inr random0. But this time, it's not as deterministic since we only get the last 4 digits. I looked at the output for the first 2000 digits. What I realized was that at some point, our output gets to zero and in some cases, remains 0! So simply wait until it happens then send 0 the required number of time. Done.
+
+### 8. Reversible Sneaky Algorithm #2 (350, 98 solves)
+Classic [Shor](https://en.wikipedia.org/wiki/Shor%27s_algorithm). We have ```n``` and ```e``` through the ```pem``` file. And we even have ```a```, ```r```. We can actually go through the algorithm and we notice that ```gcd(pow(a,r/2,n)+1,n)``` yields a large number. Bingo, we have a factor.
+
+The added difficulty I found was that in the encryption script we have the following: ```cipher = PKCS1_OAEP.new(key)```. So we must follow the same steps to decrypt. [This](https://www.dlitz.net/software/pycrypto/api/current/Crypto.PublicKey.RSA-module.html) explains how to construct a new RSA key. So the final script is:
+
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+from Crypto.Util.number import long_to_bytes
+from fractions import gcd
+from RSASolver import *
+from are_you_shor import *
+
+key = RSA.importKey(open("oligarchy.pem", "rb"))
+
+n = key.n
+e = key.e
+p = gcd(pow(a,r/2,n)+1,n)
+q = n//p
+
+key2 = RSA.construct((n,e,modinv(e,(p-1)*(q-1))))
+
+cipher = PKCS1_OAEP.new(key2)
+
+cipher.decrypt(long_to_bytes(c))
+```
+
+## III Reverse Engineering
+
+## IV Forensics
+
+## V Web exploitation
+
+## VI Pwn
 
 
