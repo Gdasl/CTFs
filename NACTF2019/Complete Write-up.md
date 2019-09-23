@@ -437,21 +437,72 @@ We get a broken PDF, as evidenced by the header that is all messed up. All you n
 We get a PDF that seems corrupted. Inspecting it with ```binwalk``` reveals a second PDF in there. Opening the file wiht a hex editor and searchinf for ```PDF``` and ```EOF``` (the end of file marker), shows us where it is. Using HexEdit I can simply cut and paste the bytes in a new empty file and thus yield 2 valid PDFs.
 
 ### 7. Filesystem Image (200, 411 solves)
-This one is easy using 7zip gui. W
+This one is easy using 7zip gui. You always see which folder has a non-null size. Keep following the trail of non-null until you find the flag.
 
 ### 8. Phuzzy Photo (250, 204 solves)
+I'm not sure if I solved this one as well as could be but essentially we know that each 6 pixel is relevant. We can dump the ```imdata``` using PIL and take each 6th pixel, and then either keep it if it's black or set it to 0 otherwise. This will give you an array with 1/6 of the size of the original array. Put it in a new image and play with the dimensions until you get something legible:
+
+```
+from PIL import Image
+
+def blocki(s,i):
+    return [s[j:j+i] for j in range(0,len(s),i)]
+
+im = Image.open('The_phuzzy_photo.png')
+
+d = im.getdata()
+
+d2 = [d[i] for i in range(len(d)) if not i%6]
+d4 = []
+for i in d2:
+    if i == (255,255,255,255):
+        d4.append(i)
+    else:
+        d4.append((0,0,0,0))
+
+im2 = Image.new('RGBA',(900,100))
+
+im2.putdata(d4)
+ims.show()
+```
 
 ### 9. File recovery (300, 388 solves)
+One word: ```binwalk``` That will extract the PNG from the image. Or you can simply search for ```PNG``` using a hexeditor and copypaste it out, your choice.
 
 ## V Web exploitation
 
 ### 1. Pink Panther (50, 1055 solves)
+Just look at the source code (Ctrl+U on most browsers), the flag is commented out.
 
 ### 2. Scooby Doo (100, 937 solves)
+Exploring the page we see that there is a ```game.html```. navigating there we see a, well, game where apparently you win a flag after clicking a billion times. Let's have a look at the ```animation.js``` which seems to control the whole shabang, in particular the ```mouseClick()``` function:
+
+```js
+function mouseClick() {
+    clickCount ++;
+    document.getElementById("score").innerHTML = "Score: " + clickCount;
+    
+    if (clickCount >= 1000000000) {
+        var elements = document.getElementsByClassName('letter');
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.opacity = "1";
+        }
+    }
+}
+```
+So after 1 bn clicks it will render all elements non-opaque. Well simply execute that part (that becomes true after 1bn clicks) and run it in your browser's console (Ctrl+Shift+I usually):
+
+```
+var elements = document.getElementsByClassName('letter');
+for (i = 0; i < elements.length; i++) {elements[i].style.opacity = "1";}
+```
+Et voila, the flag doth show.
 
 ### 3. Dexter's Lab (125, 783 solves)
+Well, SQL injection is important. The first thing to try is always ```'or 1=1--```. In this case, it proved to be enough. Boom, flag.
 
 ### 4. Sesame Street (150, 693 solves)
+So what do we have. Cookie monster, a countdown page and a flag page. During the competition, the flag page would indicate that it's not time yet and to come back later. The trick is obviously to alter the cookie. Inspecting we see a suspicious ```session-time``` cookie with a large number that turns out is unix time. Some code must check the session-time, compare it to a fixed value and only show the time if the ```session-time``` is greater or equal than the fixed value. So how about we just alter the cookie way in the future? I just incremented one of the first few digits by one and that worked.
 
 ## VI Pwn
 
