@@ -49,7 +49,7 @@ I was tempted to to use my newly minted [StringParser](https://github.com/Gdasl/
 
 ### 9. Hwang's Hidden Handiwork (100, 350 solves)
 We get 2 files: 1 is the encrypted password, the other a csv, the key. This is a simple subsitution cipher and can be solved as follows:
-```
+```python
 li1 = 'a b ....'.split() #first line of the csv
 li2 = 'T v m...'.split()#second line of the csv
 d = dict(zip(li2,li1))
@@ -151,7 +151,7 @@ uint64_t nextRand() {
 
 Basically this is a simple series where ```nextRand()``` is dependend on the previous ```nextRand()```. We can reimplement this in python:
 
-```
+```python
 def digi(d):
     return int(str(d)[4:12])**2
 ```
@@ -203,7 +203,7 @@ Essentially intro to RSA. ```c``` is the ciphertext, ```n``` the modulus and ```
 ### 5. Super Duper AES (250, 139 solves)
 This was a fun function. It's a simple implementation of a permutation/substitution. It first convert the string to hex, pads it to a multiple of 4 bytes and breaks it in blocks of 4 bytes, i.e. 8 hex digits. Then there are 2 functions:
 
-```
+```python
 def substitute(hexBlock):
     substitutedHexBlock = ""
     substitution =  [8, 4, 15, 9, 3, 14, 6, 2,
@@ -228,13 +228,13 @@ def permute(hexBlock):
 
 It doesn't really matter how many times you perform them, once you reverse them it's easy. So the first one simply substitutes hex digits. If the hex digit is 0, the new digit will be 8 etc. A nice way to reverse it:
 
-```
+```python
 sub2 = [substituion.index(i) for i in range(16)]
 ```
 
 your ```substituteRev``` function will be the same as ```substitute``` with the reverse array. And guess what, same thing for ```permuteRev```. All that is left is to reverse the main function (roundRev). The final solution looks like this:
 
-```
+```python
 def revsub(hexBlock):
     substitutedHexBlock = ""
     sub2 = [15, 9, 7, 4, 1, 11, 6, 10, 0, 3, 13, 14, 12, 8, 5, 2]
@@ -307,6 +307,109 @@ cipher.decrypt(long_to_bytes(c))
 ```
 
 ## III Reverse Engineering
+
+### 1. Keygen (600, 172 solves)
+I like revs. Revs are fun. In this case we have a simple ELF-32 binary. Fire up IDA and have a look. ```main``` won't deompile because of a positive ```sp``` value. Icouldn't be bothered so I looked at the other functions. ```sub_80491B6``` looks interesting.
+
+```c
+__int64 __cdecl sub_80491B6(_BYTE *a1)
+{
+  _BYTE *i; // [sp+4h] [bp-Ch]@1
+  __int64 v3; // [sp+8h] [bp-8h]@1
+
+  v3 = 0LL;
+  for ( i = a1; i < a1 + 8; ++i )
+  {
+    v3 *= 62LL;
+    if ( *i > 64 && *i <= 90 )
+      v3 += *i - 65;
+    if ( *i > 96 && *i <= 122 )
+      v3 += *i - 71;
+    if ( *i > 47 && *i <= 57 )
+      v3 += *i + 4;
+  }
+  return v3;
+}
+```
+
+Hm it look as if it performs some kind of hashing. It sets v3 to 0, then takes a string as an input and loops through the first 8 chars. If the char is an uppercase letter (ASCII ord between 64 and 90), add the position of the letter in the charset to v3. So if it's ```A``` it will add 0, if ```B``` 1 etc. The logic for lowercase (96 to 112) and digits (47 to 57) is the same. After each loops it multiplies v3 by 64.
+
+So who calls that function. We can select it in the IDA view and hit ```X``` which shows us the references. And it looks like ```sub_804928C``` calls it. Here's the code for that one:
+
+```c
+bool __cdecl sub_804928C(char *s)
+{
+  bool result; // al@2
+
+  if ( strlen(s) == 15 )
+  {
+    if ( s == strstr(s, "nactf{") )
+    {
+      if ( s[14] == 125 )
+        result = sub_80491B6(s + 6) == 21380291284888LL;
+      else
+        result = 0;
+    }
+    else
+    {
+      result = 0;
+    }
+  }
+  else
+  {
+    result = 0;
+  }
+  return result;
+}
+```
+
+Looks like this is it. It takes the input string, makes sure the beginning is ```nactf{```, that the end is ```}``` and then ```sub_80491B6``` on the middle part, checking if it equals ```21380291284888LL```. The idea here is easy: since we know ```v3``` is multiplied by 63 each time, substracting the correct number from the result should yield a number that is divisible by 63. And so on. Full script:
+
+```python
+target = 21380291284888L
+
+def isUpper(n):
+    for i in range(65,91):
+        tmp = i-65
+        if not (n-tmp)%62:
+            return True,i,(n-tmp)/62
+    return False,None,None
+
+def isLower(n):
+    for i in range(97,123):
+        tmp = i-71
+        if not (n-tmp)%62:
+            return True,i,(n-tmp)/62
+    return False,None,None
+
+def isNumber(n):
+    for i in range(48,58):
+        tmp = i+4
+        if not (n-tmp)%62:
+            return True,i,(n-tmp)/62
+    return False,None,None
+
+
+
+def reverser(t):
+    a = False
+    tmp = ''
+    menu = [isUpper,isLower,isNumber]
+    i = 0
+    while not a:
+        a, tmp,newT = menu[i](t)
+        i+= 1
+    return tmp,newT
+
+t2 = target
+s = ''
+
+for i in range(8):
+    tmp, t2 = reverser(t2)
+    s += chr(tmp)
+```
+
+
 
 ## IV Forensics
 
